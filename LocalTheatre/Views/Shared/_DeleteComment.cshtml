@@ -1,0 +1,42 @@
+﻿@model LocalTheatre.Models.Comment
+@using (Html.BeginForm("DeleteComment", "Posts"))
+{
+    @Html.AntiForgeryToken()
+<div>
+    <h4>Comment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        @Html.HiddenFor(model => model.CommentID)
+        @Html.HiddenFor(model => model.PostID)
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.commentMain)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.commentMain)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CommentDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CommentDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+    </dl>
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" />
+        </div>
+    
+</div>
+}

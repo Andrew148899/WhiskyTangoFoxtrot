@@ -1,0 +1,66 @@
+﻿@model LocalTheatre.Models.Post
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Post</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PostTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PostTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PostDesc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PostDesc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PostDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PostDate)
+        </dd>
+
+    </dl>
+    <div>
+        @foreach (var item in Model.Comments)
+        {
+            <div>@item.commentMain</div>
+            <div>
+                <label>by</label>
+                <label>@item.UserName</label>
+                <label> on </label>
+                <label>@item.CommentDate</label>
+            </div>
+            
+        }
+    </div>
+    <div>
+        @Html.Partial("_AddComment", new LocalTheatre.Models.Comment { PostID = Model.PostID })
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PostID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

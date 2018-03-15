@@ -1,0 +1,51 @@
+﻿@model IEnumerable<LocalTheatre.Models.Post>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Posts & Articles</h2>
+@if ((User.Identity.IsAuthenticated) && (User.IsInRole("Admin")))
+   {
+     <p>
+    @Html.ActionLink("Create New", "Create")
+    </p>
+   }
+
+
+@foreach (var item in Model)
+{
+<div class="detailBox">
+    <div class="titleBox">
+
+      <label>@Html.DisplayFor(modelItem => item.PostTitle)</label>
+        <button type="button" class="close" aria-hidden="true">&times;</button>
+    </div>
+    <div class="commentBox">
+        <p class="taskDescription"> by @Html.DisplayFor(modelItem => item.UserName)</p>
+        <p class="taskDescription">@Html.DisplayFor(modelItem => item.PostDesc)</p>
+    </div>
+    <div class="actionBox">
+        <ul class="commentList">
+@foreach (var cmt in item.Comments)
+{
+            <li>
+                <div class="commentText">
+                    <p class="">@cmt.commentMain</p> <p class="">@cmt.UserName</p> <span class="date sub-text">@cmt.CommentDate</span>
+
+                </div>
+            </li>
+}
+        </ul>
+        <form class="form-inline" role="form">
+          
+            <div>
+                @Html.ActionLink("Edit", "Edit", new { id = item.PostID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.PostID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.PostID })
+            </div>
+            <hr />
+        </form>
+    </div>
+</div>
+}
